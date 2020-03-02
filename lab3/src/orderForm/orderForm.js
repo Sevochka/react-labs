@@ -60,7 +60,7 @@ export default class extends React.Component {
                             ref={this.inputAddress}
                         />
                     </InputGroup>
-                     <button className="btn btn-success mt-2" onClick={this.handleSubmit}>Submit</button> 
+                    <button className="btn btn-success mt-2" onClick={this.handleSubmit}>Submit</button> 
                 </Alert>
             </Container>
         );
