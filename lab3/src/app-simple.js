@@ -8,6 +8,7 @@ export default class extends React.Component{
        inp2: 'start other'
     }
 
+    
     render(){
 
         return (

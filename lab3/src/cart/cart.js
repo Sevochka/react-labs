@@ -4,6 +4,7 @@ import styles from "./../app.module.css";
 import { Button } from "react-bootstrap";
 
 export default class extends React.Component {
+
     sendForm = () => {
         this.props.setPage("order");
     };
@@ -28,7 +29,7 @@ export default class extends React.Component {
                     </td>
                     <td>{product.price * product.current}</td>
                     <td>
-                        <button onClick={() => this.remove(i)}>X</button>
+                        <button onClick={(e) => this.props.remove(i)}>X</button>
                     </td>
                 </tr>
             );
@@ -51,16 +52,8 @@ export default class extends React.Component {
                 </table>
                 <h3>Total: {total}</h3>
                 <hr />
-                <Button variant="warning" >
+                <Button variant="warning" onClick={this.props.next}>
                     Go to Order Forms
-                </Button>
-
-                <hr />
-                <Button
-                    variant="primary"
-                    onClick={() => this.props.changeCnt(1, 4)}
-                >
-                    Unreal change cnt
                 </Button>
             </div>
         );

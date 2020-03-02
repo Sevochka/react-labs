@@ -20,49 +20,68 @@ export default class extends React.Component {
     }
 
     removeProduct(i) {
-        let products = [...products];
+        let products = [...this.state.products];
         products.splice(i, 1);
         this.setState({
             products
         });
     }
 
-    //Pages switchers
-    goToCart() {this.setState({currentPage: "Cart"})}
-    goToOrder() {this.setState({currentPage: "Cart"})}
-    goToResultScreen() {this.setState({currentPage: "Result"})}
+    handleInputChange(key, value) {
+        let userInfo = {...this.state.userInfo};
+        userInfo[key] = {...userInfo[key], value};
+        this.setState({
+            userInfo
+        })
+    }
 
+    //Pages switchers. (замена роутов)
+    goToCart = () => {
+        this.setState({ currentPage: "Cart" });
+    };
+    goToOrder = () => {
+        this.setState({ currentPage: "Order" });
+    };
+    goToResultScreen = () => {
+        this.setState({ currentPage: "Result" });
+    };
 
     render() {
-        if (this.state.page === "cart") {
-            return (
-                <CartModule
-                    products={this.state.products}
-                    changeCnt={(i, cnt) => this.changeProductCnt(i, cnt)}
-                    remove={i => {
-                        this.removeProduct(i);
-                    }}
-                    setPage={p => this.setPage(p)}
-                />
-            );
-        }
-        if (this.state.page === "order") {
-            return (
-                <OrderFormModule
-                    products={this.state.products}
-                    userInfo={this.state.userInfo}
-                    updateUserInfo={userInfo => this.updateUserInfo(userInfo)}
-                    setPage={p => this.setPage(p)}
-                />
-            );
-        } else {
-            return (
-                <ResultScreenModule
-                    products={this.state.products}
-                    userInfo={this.state.userInfo}
-                    setPage={p => this.setPage(p)}
-                />
-            );
+        switch (this.state.currentPage) {
+            case "Cart":
+                return (
+                    <CartModule
+                        products={this.state.products}
+                        changeCnt={(i, cnt) => this.changeProductCnt(i, cnt)}
+                        remove={i => {
+                            this.removeProduct(i);
+                        }}
+                        next={this.goToOrder}
+                    />
+                );
+            case "Order":
+                return (
+                    <OrderFormModule
+                        userInfo={this.state.userInfo}
+                        onChange={(key, value) => this.handleInputChange(key, value)}
+                        back={this.goToCart}
+                        next={this.goToResultScreen}
+                    />
+                );
+            case "Result":
+                return (
+                    <ResultScreenModule
+                        products={this.state.products}
+                        userInfo={this.state.userInfo}
+                        setPage={p => this.setPage(p)}
+                    />
+                );
+            default:
+                return (
+                    <div className="container mt-4">
+                        <h2>Page not found. Error 404</h2>
+                    </div>
+                );
         }
     }
 }
@@ -101,9 +120,20 @@ function getProducts() {
 }
 
 function getUserInfo() {
-    return {
-        name: "Seva",
-        surname: "Kochnev",
-        address: "House Bouse He"
-    };
+    return(
+        {
+            name: {
+                label:"First Name",
+                value:''
+            },
+            surname: {
+                label:"Last Name",
+                value:''
+            },
+            email: {
+                label:"Email",
+                value:''
+            },
+        }
+    );
 }
