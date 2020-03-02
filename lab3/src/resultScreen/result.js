@@ -16,7 +16,7 @@ export default class extends React.Component {
         });
 
         return (
-            <Alert variant="danger" className="container">
+            <Alert variant="danger" className="container mt-4">
                 Покупка совершена! Вы купили:
                 <table className="table table-bordered">
                     <thead>

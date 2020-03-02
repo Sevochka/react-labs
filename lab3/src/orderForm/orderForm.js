@@ -19,6 +19,7 @@ export default class extends React.Component {
         })
     }
 
+    
     render() {
         let inputDOMElements = [];
         let userInfo = this.props.userInfo;
@@ -69,7 +70,7 @@ export default class extends React.Component {
                         <Button variant="secondary" onClick={this.hide}>
                             Hmm, you're actually right
                         </Button>
-                        <Button variant="primary" onClick={this.hide}>
+                        <Button variant="primary" onClick={this.props.next}>
                             I don't care. Let's get my stuff
                         </Button>
                     </Modal.Footer>

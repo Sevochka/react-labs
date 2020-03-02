@@ -1,6 +1,5 @@
 import React from "react";
 import AppMinMax from "./../inputs/minmax/minmax";
-import styles from "./../app.module.css";
 import { Button } from "react-bootstrap";
 
 export default class extends React.Component {
