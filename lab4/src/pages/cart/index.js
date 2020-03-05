@@ -54,6 +54,7 @@ import {observer} from 'mobx-react';
                     Send
                 </button>
             </div>
+            
         );
     }
 }
